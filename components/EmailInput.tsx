@@ -5,7 +5,7 @@ import { ErrorHoverCard } from "./ErrorHoverCard";
 import { useFormContext } from "react-hook-form";
 
 
-const EmailInput = ({ name, label }: { name: string; label: string }) => {
+const EmailInput = ({ name, label, onChange, value }: { name: string; label: string, onChange: any, value: string }) => {
 
   const { register, formState: { errors }} = useFormContext();
 
@@ -17,7 +17,10 @@ const EmailInput = ({ name, label }: { name: string; label: string }) => {
       <Input
         {...register("email")}
         id={name}
+        name="email"
         type="email"
+        value={value}
+        onChange={onChange}
         placeholder="m@example.com"
         required
       />

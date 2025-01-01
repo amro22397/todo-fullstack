@@ -4,13 +4,14 @@ import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google"
 import { User } from "@/models/user";
+import bcrypt from "bcrypt"
 
 export const authConfig: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
 
     providers: [
         CredentialsProvider({
-            name: "Sign in",
+            name: "credentials",
             credentials: {
                 email: {
                     label: "Email",
@@ -27,21 +28,31 @@ export const authConfig: NextAuthOptions = {
                 if (!credentials || !credentials.email || !credentials.password)
                     return null;
 
-                mongoose.connect(process.env.MONGO_URL);
-                const dbUser = await User.findOne({email: credentials.email});
+                mongoose.connect(process.env.MONGO_URL as string);
+                const dbUser = await User.findOne({email: credentials.email})
 
-                if (!dbUser) {
-                    const user = await User.create({email: credentials.email, hashedPassword: credentials.password});
-                    return Response.json(user);
-                }
+                if (!dbUser || !dbUser?.hashedPassword) {
+                    throw new Error("Invalid email or password");
+                  }
+    
+                  const isCorrectPassword = await bcrypt.compare(
+                    credentials.password,
+                    dbUser.hashedPassword
+                  );
+          
+                  if (!isCorrectPassword) {
+                    throw new Error("Invalid email or password");
+                  }
 
-
-                if (dbUser && dbUser.password === credentials.password) {
-                    const { password, createdAt, id, ...dbUserWithoutPassword } = dbUser;
+                /* if (dbUser && dbUser.hashedPassword === credentials.password) {
+                    const { hashedPassword, createdAt, _id, ...dbUserWithoutPassword } = dbUser;
                     return dbUserWithoutPassword as any;
                 }
 
-                return null;
+                return null; */
+
+                return dbUser;
+
             },
         }),
 

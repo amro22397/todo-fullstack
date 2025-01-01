@@ -5,7 +5,7 @@ import { ErrorHoverCard } from "./ErrorHoverCard";
 import { useFormContext } from "react-hook-form";
 
 
-const PasswordInput = ({ name, label }: { name: string; label: string }) => {
+const PasswordInput = ({ name, label, onChange, value }: { name: string; label: string, onChange: any, value: string }) => {
 
   const {
     register,
@@ -22,6 +22,9 @@ const PasswordInput = ({ name, label }: { name: string; label: string }) => {
       <Input
         id={name}
         {...register(name)}
+        name="password"
+        value={value}
+        onChange={onChange}
         type="password"
         required
         placeholder={`Your ${label}...`}
