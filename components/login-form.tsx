@@ -34,6 +34,9 @@ export function LoginForm({
   const methods = useForm<AuthFormData>({ resolver: zodResolver(authSchema) });
   const { toast } = useToast();
 
+  const router = useRouter();
+  const { loginFunction, isLoading } = useUserStore();
+
   const onSubmit = (data: AuthFormData) => {
 
     console.log("Sign In Data:", data);
