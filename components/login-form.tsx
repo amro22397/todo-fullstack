@@ -35,7 +35,7 @@ export function LoginForm({
   const { toast } = useToast();
 
   const router = useRouter();
-  const { loginFunction, isLoading } = useUserStore();
+  // const { loginFunction, isLoading } = useUserStore();
 
   const onSubmit = (data: AuthFormData) => {
 
@@ -87,7 +87,7 @@ export function LoginForm({
             </CardContent>
             <CardFooter>
               <Button type="submit" className="w-full">
-                {isLoading ? "loading..." : "Sign In"}
+                sign in
               </Button>
             </CardFooter>
           </form>

@@ -21,10 +21,62 @@ import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
-import { useUserStore } from "@/app/stores/useUserStore";
+// import { useUserStore } from "@/app/stores/useUserStore";
 
 
 const SignUp = () => {
+  const methods = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+  });
+
+  const { toast } = useToast();
+  const router = useRouter();
+
+  // const { signUpFunction, isLoading } = useUserStore();
+
+  const onSubmit = async (data: SignUpFormData) => {
+    const res = await signUpFunction({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (res.result) {
+      toast({
+        title: "Sign up successful!",
+        description: "Your account has been created.",
+      });
+      router.push("/to-dos");
+    } else if (res.error) {
+      toast({
+        title: res.error,
+        description:
+          "This email is already registered. Please use a different email or try logging in.",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Sign up failed",
+        description: "An unknown error occurred",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleErrorsToast = () => {
+    const { errors } = methods.formState;
+    const errorFields = ["email", "password", "confirmPassword"] as const;
+
+    errorFields.forEach((field) => {
+      if (errors[field]) {
+        toast({
+          title: "Validation Error",
+          description: errors[field]?.message?.toString(),
+          variant: "destructive",
+        });
+      }
+    });
+  };
+  
   return (
     <div>
       <AppLogo />
@@ -51,7 +103,7 @@ const SignUp = () => {
             </CardContent>
             <CardFooter>
               <Button type="submit" className="w-full">
-                {isLoading ? "loading..." : "create an account"}
+                create
               </Button>
             </CardFooter>
           </form>
