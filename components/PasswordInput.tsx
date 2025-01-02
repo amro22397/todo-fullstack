@@ -1,19 +1,19 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { ErrorHoverCard } from "./ErrorHoverCard";
+// import { ErrorHoverCard } from "./ErrorHoverCard";
 import { useFormContext } from "react-hook-form";
 
 
 const PasswordInput = ({ name, label, onChange, value }: { name: string; label: string, onChange: any, value: string }) => {
 
-  const {
+  /* const {
     register,
     formState: { errors },
   } = useFormContext();
 
   // Simplified errorMessage logic based on name
-  const errorMessage = errors[name]?.message?.toString();
+  const errorMessage = errors[name]?.message?.toString(); */
 
   
   return (
@@ -21,7 +21,7 @@ const PasswordInput = ({ name, label, onChange, value }: { name: string; label: 
       <Label htmlFor={name}>{label}</Label>
       <Input
         id={name}
-        {...register(name)}
+       // {...register(name)}
         name="password"
         value={value}
         onChange={onChange}
@@ -29,7 +29,10 @@ const PasswordInput = ({ name, label, onChange, value }: { name: string; label: 
         required
         placeholder={`Your ${label}...`}
       />
+      
+      {/*
       {errorMessage && <ErrorHoverCard message={errorMessage} />}
+      */}
     </div>
   )
 }

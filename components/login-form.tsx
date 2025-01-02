@@ -16,6 +16,8 @@ import Link from "next/link"
 
 import { signIn } from "next-auth/react";
 
+import { useSession, signOut } from 'next-auth/react' 
+
 import { useState } from "react"
 
 
@@ -24,6 +26,11 @@ export function LoginForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
 
+  const session = useSession();
+
+  console.log(session);
+
+  
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState<any>({
@@ -42,7 +49,7 @@ export function LoginForm({
     e.preventDefault();
         setLoading(true);
 
-        await signIn('credentials', {...formData, callbackUrl: '/'});
+        await signIn('credentials', {...formData, callbackUrl: '/to-dos'});
         setLoading(false);
   }
 

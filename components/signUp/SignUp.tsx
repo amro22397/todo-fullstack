@@ -14,7 +14,7 @@ import Link from "next/link";
 import { AppLogo } from "../AppLogo";
 import EmailInput from "../EmailInput";
 import PasswordInput from "../PasswordInput";
-import { signUpSchema } from "../validationSchema";
+import { signUpSchema } from "../ValidationSchema";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -34,16 +34,17 @@ import axios from "axios";
 
 
 const SignUp = () => {
-  const methods = useForm<SignUpFormData>({
-    resolver: zodResolver(signUpSchema),
-  });
 
   const { toast } = useToast();
   const router = useRouter();
 
-  // const { signUpFunction, isLoading } = useUserStore();
 
-  /* const onSubmit = async (data: SignUpFormData) => {
+  /* const methods = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+  });
+   const { signUpFunction, isLoading } = useUserStore();
+
+   const onSubmit = async (data: SignUpFormData) => {
     const res = await signUpFunction({
       email: data.email,
       password: data.password,
@@ -106,11 +107,8 @@ const SignUp = () => {
 
 
     const handleSignUpWithGoogle = async (e:any) => {
-      try {
-        const result = await signInWithPopup(auth, googleProvider);
-      } catch (error) {
-        console.log(error);
-      }
+    e.preventDefault();
+    signIn('google', {callbackUrl: '/to-dos'})
 
 
     }
@@ -133,8 +131,8 @@ const SignUp = () => {
           title: "Account created successfully",
         });
 
-        signIn('credentials', {...formData, callbackUrl: '/'});
-      }).then((callback) => {
+        signIn('credentials', {...formData, callbackUrl: '/to-dos'});
+      }).then((callback: any) => {
         if (callback?.ok) {
           toast({
             title: "Logged in successfully"
@@ -161,7 +159,7 @@ const SignUp = () => {
     <div>
       <AppLogo />
       <Card className="w-full max-w-sm py-2">
-        <FormProvider {...methods}>
+        
           <form onSubmit={handleSubmit}>
             <CardHeader>
               <CardTitle className="text-[22px] font-bold">Sign Up</CardTitle>
@@ -184,7 +182,7 @@ const SignUp = () => {
 
               <EmailInput name="email" label="Email" onChange={handleChange} value={formData.email} />
               <PasswordInput name="password" label="Password" onChange={handleChange} value={formData.password} />
-              <PasswordInput name="confirmPassword" label="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}
+              <PasswordInput name="confirmPassword" label="Confirm Password" onChange={(e: any) => setConfirmPassword(e.target.value)}
               value={confirmPassword} />
               
               <div className="mt-4 text-sm flex items-center justify-center gap-1">
@@ -200,7 +198,7 @@ const SignUp = () => {
               </Button>
             </CardFooter>
           </form>
-        </FormProvider>
+        
       </Card>
     </div>
   )
