@@ -21,7 +21,7 @@ import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 import { useState } from "react";
 
@@ -90,6 +90,9 @@ const SignUp = () => {
 
   const [loading, setLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const session = useSession();
+   console.log(session);
   
     const [formData, setFormData] = useState<any>({
       email: "",

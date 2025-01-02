@@ -3,7 +3,7 @@ import { User } from "@/models/user"
 import bcrypt from "bcrypt"
 
 export async function POST(request: Request) {
-    mongoose.connect(process.env.MONGO_URL)
+    mongoose.connect(process.env.MONGO_URL as string)
     
     const {email, password} = await request.json();
 
