@@ -1,4 +1,3 @@
-"use client"
 
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -13,15 +12,13 @@ import { toast } from "@/hooks/use-toast";
 import CircularProgress from '@mui/joy/CircularProgress';
 import { FaUmbrellaBeach } from "react-icons/fa6";
 import { useSession } from "next-auth/react";
+import mongoose from "mongoose";
+import { Tasks } from "@/models/tasks";
 // import { useUserStore } from "@/app/stores/useUserStore";
 
 
 const TasksArea = ({ tasks }: {tasks: Task[]}) => {
  // const { tasks, fetchTasks } = useTasksStore();
- const session = useSession();
- console.log(session);
-
-
 
 
   return (
@@ -37,7 +34,7 @@ const TasksArea = ({ tasks }: {tasks: Task[]}) => {
       ) : (
         <>
           {tasks.map((singleTask) => (
-            <SingleTask key={singleTask.id} singleTask={singleTask} />
+            <SingleTask key={singleTask.id} singleTask={singleTask} id={singleTask._id} />
           ))}
         </>
       )}
@@ -46,42 +43,52 @@ const TasksArea = ({ tasks }: {tasks: Task[]}) => {
 }
 
 
-export function SingleTask({ singleTask }: { singleTask: Task }) {
+export async function SingleTask({ singleTask, id }: { singleTask: Task, id: string }) {
 
 //  const { updateTaskFunction, setTaskSelected, setIsTaskDialogOpened } = useTasksStore();
-  const [loading, setLoading] = useState(false);
-
-
+  console.log(id);
   const handleCheckboxChange = () => {
 
+    const updateTaskObject: Task = {
+      ...singleTask,
+      status: singleTask.status === "completed" ? "in progress" : "completed"
+    }
   }
+
+  mongoose.connect(process.env.MONGO_URL as string)
+      const task = await Tasks.findOne({_id: id});
+
+      console.log(task);
+  
+
+  const lowerOpacity = singleTask.status === "completed" && "opacity-65"
 
   return (
     <div
-      className={`border flex items-center p-3 rounded-md w-full justify-between mb-3 /*lowerOpacity*/  `}
+      className={`border flex items-center p-3 rounded-md w-full justify-between mb-3 ${lowerOpacity}`}
     >
       <div className="flex items-center gap-2">
+        {/*
         {loading ? (
           <CircularProgress size="sm" color="primary" />
         ) : (
           <>
-          {/*
-            <Checkbox
+          <Checkbox
             id={`task-${singleTask.id}`}
             className="w-5 h-5"
             checked={singleTask.status === "completed"}
             onCheckedChange={handleCheckboxChange}
           />
-            */}
           </>
         )}
+        */}
 
         <div className="flex flex-col gap-1">
         <label
-            onClick={() => {
+           /* onClick={() => {
               //setTaskSelected(singleTask);
               //setIsTaskDialogOpened(true);
-            }}
+            }} */
             htmlFor="task"
             className="text-lg font-semibold cursor-pointer hover:text-primary"
           >
@@ -96,7 +103,7 @@ export function SingleTask({ singleTask }: { singleTask: Task }) {
       </div>
       <div className="flex gap-3 items-center ">
       <ComboboxDemo singleTask={singleTask} />
-      <TasksOptions singleTask={singleTask} />
+      <TasksOptions singleTask={singleTask} id={id} />
       </div>
     </div>
   )

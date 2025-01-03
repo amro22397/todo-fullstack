@@ -19,20 +19,19 @@ import TaskForm from "./TaskForm";
 import { FaPlus } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // import { useTasksStore } from "@/app/stores/useTasksStore";
 import { nanoid } from "nanoid";
 import { Task } from "@/app/data/Tasks";
 import { toast } from "@/hooks/use-toast";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import { AppContext } from "@/context/AppContext";
 // import { useUserStore } from "@/app/stores/useUserStore";
 
 const TaskDialog = () => {
 
   const session = useSession();
-    console.log(session);
-    console.log(session.data?.user?.email)
 
     const [formData, setFormData] = useState({
       name: "",
@@ -41,8 +40,19 @@ const TaskDialog = () => {
       userId: "",
     });
 
-  const [isTaskDialogOpened, setIsTaskDialogOpened] = useState(false);
+    const [isTaskDialogOpened, setIsTaskDialogOpened] = useState(false);
+
+  
   const [loading, setLoading] = useState(false);
+
+  const handleDialogStateChange = (isTaskDialogOpened: boolean) => {
+    setIsTaskDialogOpened(isTaskDialogOpened);
+    if (!isTaskDialogOpened) {
+      setFormData({
+        name: "", priority: "", status: "", userId: "",
+      })
+    }
+  }
 
   const handleSubmit = async () => {
 
@@ -68,7 +78,7 @@ const TaskDialog = () => {
   }
 
   return (
-    <Dialog open={isTaskDialogOpened} onOpenChange={() => setIsTaskDialogOpened(true)}>
+    <Dialog open={isTaskDialogOpened} onOpenChange={handleDialogStateChange}>
       <DialogTrigger asChild>
         <Button className="flex items-center gap-1">
           <FaPlus />
@@ -78,8 +88,15 @@ const TaskDialog = () => {
       {/* Form Provider */}
       
         <DialogContent className="p-7 poppins">
-        <IoMdClose onClick={() => setIsTaskDialogOpened(false)}
-          className="absolute right-3 top-[11.8px] text-2xl text-gray-600 active:scale-95 z-50 cursor-pointer"/>
+
+        <IoMdClose onClick={() => {
+          setFormData({
+            name: "", priority: "", status: "", userId: "",
+          })
+          setIsTaskDialogOpened(false);
+        }}
+          className="absolute right-3 top-[11.8px] text-2xl text-gray-600 active:scale-95 z-50 cursor-pointer hidden"/>
+          
           <DialogHeader>
             <DialogTitle className="text-xl">
               {/* {taskSelected ? "Edit Task" : "Add Task"} */}

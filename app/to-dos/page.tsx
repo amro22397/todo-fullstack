@@ -22,8 +22,8 @@ const page = async () => {
         className="w-[55%] border border-gray-400 flex flex-col gap-6 bg-inherit shadow-md 
       rounded-md p-8"
       >
-        <TaskHeader />
-        <Stats />
+        <TaskHeader  />
+        <Stats tasks={tasks}/>
         <AllTasksHeader />
         <TasksArea tasks={tasks}  />
         <TasksFooter tasks={tasks} />

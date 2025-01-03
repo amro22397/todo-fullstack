@@ -1,6 +1,7 @@
 
 // import { useTasksStore } from "@/app/stores/useTasksStore";
 
+import { Task } from "@/app/data/Tasks";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -19,8 +20,8 @@ import { FaCircle } from "react-icons/fa6";
 
 
 
-const TaskForm = ({ isTaskDialogOpened, formData, setFormData }: {
-  isTaskDialogOpened: boolean, formData: any, setFormData: any
+const TaskForm = ({ isTaskDialogOpened, formData, setFormData, singleTask }: {
+  isTaskDialogOpened: boolean, formData: any, setFormData: any, singleTask: Task
 }) => {
 
   const session = useSession();
@@ -32,16 +33,16 @@ const TaskForm = ({ isTaskDialogOpened, formData, setFormData }: {
 
   return (
     <div className="flex flex-col gap-6 mt-8">
-      <TaskName name={formData.name} setName={(e: any) => setFormData({
+      <TaskName name={singleTask?.name || formData.name} setName={(e: any) => setFormData({
         ...formData,
         name: e.target.value,
       })} />
       <div className="grid grid-cols-2 gap-6">
-        <TaskPriority isTaskDialogOpened={isTaskDialogOpened} selected={formData.priority} setSelected={(e: any) => setFormData({
+        <TaskPriority isTaskDialogOpened={isTaskDialogOpened} selected={singleTask?.priority || formData.priority} setSelected={(e: any) => setFormData({
           ...formData,
           priority: e,
         })} />
-        <TaskStatus isTaskDialogOpened={isTaskDialogOpened} selectedStatus={formData.status} setSelectedStatus={(e: any) => setFormData({
+        <TaskStatus isTaskDialogOpened={isTaskDialogOpened} selectedStatus={singleTask?.status || formData.status} setSelectedStatus={(e: any) => setFormData({
           ...formData,
           status: e,
         })} />
@@ -62,7 +63,7 @@ function TaskName({name, setName}: {name: string, setName: any}) {
         type="text"
         placeholder="Enter a name of the task"
         className="mt-1"
-        value={name}
+        defaultValue={name}
         onChange={setName}
       />
 
@@ -106,7 +107,7 @@ function TaskPriority({isTaskDialogOpened, selected, setSelected}: {
     <div>
       <Label className="mb-1">Priority</Label>
 
-      <Select value={selected} onValueChange={setSelected}>
+      <Select defaultValue={selected} onValueChange={setSelected}>
         <SelectTrigger className="w-full mt-1">
           <SelectValue placeholder="Select a priority" />
         </SelectTrigger>
@@ -173,7 +174,7 @@ function TaskStatus({ isTaskDialogOpened, selectedStatus, setSelectedStatus }: {
   return (
     <div>
       <Label className="mb-1">Select Status</Label>
-      <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+      <Select defaultValue={selectedStatus} onValueChange={setSelectedStatus}>
         <SelectTrigger className="w-full mt-1">
           <SelectValue placeholder="Select a status" />
         </SelectTrigger>

@@ -12,3 +12,15 @@ export async function POST(request: Request) {
 
     return Response.json(task);
 }
+
+
+export async function PUT(request: Request) {
+    mongoose.connect(process.env.MONGO_URL as string)
+    
+    const body = await request.json();
+    const { id, ...rest } = body
+
+    const task = await Tasks.findByIdAndUpdate(id, rest);
+
+    return Response.json(task);
+}

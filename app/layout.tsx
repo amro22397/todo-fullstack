@@ -4,6 +4,8 @@ import { Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster"
 import "./globals.css";
 import AppProvider from "@/AppContext"
+import AppContextProvider from "@/context/AppContext";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,8 +42,17 @@ export default function RootLayout({
         className={poppins.variable}
       >
         <AppProvider>
-        {children}
-        <Toaster />
+          <AppContextProvider>
+          <ThemeProvider 
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          >
+          {children}
+          </ThemeProvider>
+          <Toaster />
+          </AppContextProvider>
         </AppProvider>
         
       </body>

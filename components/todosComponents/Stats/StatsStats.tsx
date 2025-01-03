@@ -1,18 +1,39 @@
 // import { useTasksStore } from "@/app/stores/useTasksStore";
 "use client"
 
+import { Task } from "@/app/data/Tasks";
 import { Separator } from "@/components/ui/separator";
+import { Tasks } from "@/models/tasks";
+import mongoose from "mongoose";
 import { useEffect, useState } from "react";
 
 type SingleStat = { label: string; unit: string; counter: number };
 
-const Stats = () => {
+const Stats = ({tasks} : { tasks: Task[] }) => {
 
     const [statsArray, setStatsArray] = useState<SingleStat[]>([
         { label: "Completed", unit: "Tasks", counter: 3 },
         { label: "Pending", unit: "Tasks", counter: 4 },
         { label: "Progress", unit: "%", counter: 4 },
       ]);
+
+      
+      useEffect(() => {
+        const getCompletedTasks = tasks.filter(task => task.status === "completed").length;
+
+        const getPendingTasks = tasks.length - getCompletedTasks;
+    const getProgressValue = (getCompletedTasks / tasks.length) * 100; 
+
+    setStatsArray([
+      { label: "Completed", unit: "Tasks", counter: getCompletedTasks },
+      { label: "Pending", unit: "Tasks", counter: getPendingTasks },
+      {
+        label: "Progress",
+        unit: "%",
+        counter: parseInt(getProgressValue.toFixed(2)) || 0,
+      },
+    ])
+      }, [tasks]);
       
   return (
     <div className="flex gap-5 py-5">

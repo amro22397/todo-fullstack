@@ -42,6 +42,27 @@ const PriorityCombobox = ({ singleTask }: { singleTask: Task }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   // const { updateTaskFunction, isLoading } = useTasksStore();
 
+
+  React.useEffect(() => {
+    setValue(singleTask.priority);
+  }, [singleTask]);
+
+  
+  function isValidPriority(value: string) {
+    return value === "low" || value === "medium" || value === "high";
+  }
+
+  function onSelectFunction(currentValue: string) {
+    if (!isValidPriority(currentValue)) {
+      return;
+    }
+
+    const updatedTask: Task = { ...singleTask, priority: currentValue };
+
+    setValue(currentValue);
+    setOpen(false);
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -65,7 +86,7 @@ const PriorityCombobox = ({ singleTask }: { singleTask: Task }) => {
                 <CommandItem
                   key={framework.value}
                   value={framework.value}
-                  // onSelect={onSelectFunction}
+                  onSelect={onSelectFunction}
                   disabled={isLoading}
                 >
                   {value === framework.value && isLoading
