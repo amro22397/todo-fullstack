@@ -32,11 +32,13 @@ import { AppContext } from "@/context/AppContext";
 const TaskDialog = () => {
 
   const session = useSession();
+  console.log(session?.data?.user?.email)
 
     const [formData, setFormData] = useState({
       name: "",
       priority : "",
       status: "",
+      userEmail: session?.data?.user?.email || "",
       userId: "",
     });
 
@@ -45,14 +47,16 @@ const TaskDialog = () => {
   
   const [loading, setLoading] = useState(false);
 
-  const handleDialogStateChange = (isTaskDialogOpened: boolean) => {
-    setIsTaskDialogOpened(isTaskDialogOpened);
-    if (!isTaskDialogOpened) {
+    useEffect(() => {
       setFormData({
-        name: "", priority: "", status: "", userId: "",
+        name: "",
+      priority : "",
+      status: "",
+      userEmail: session?.data?.user?.email || "",
+      userId: "",
       })
-    }
-  }
+    }, [isTaskDialogOpened]);
+
 
   const handleSubmit = async () => {
 
@@ -60,12 +64,13 @@ const TaskDialog = () => {
 
     axios.post("/api/tasks", formData)
     .then(() => {
+      setIsTaskDialogOpened(false);
+      window.location.reload();
+    })
+    .then(() => {
       toast({
         title: "Task added successfully",
       })
-    })
-    .then(() => {
-      setIsTaskDialogOpened(false);
     })
     .catch((error) => {
       toast({
@@ -78,7 +83,7 @@ const TaskDialog = () => {
   }
 
   return (
-    <Dialog open={isTaskDialogOpened} onOpenChange={handleDialogStateChange}>
+    <Dialog open={isTaskDialogOpened} onOpenChange={() => setIsTaskDialogOpened(!isTaskDialogOpened)}>
       <DialogTrigger asChild>
         <Button className="flex items-center gap-1">
           <FaPlus />
@@ -89,6 +94,7 @@ const TaskDialog = () => {
       
         <DialogContent className="p-7 poppins">
 
+        {/*
         <IoMdClose onClick={() => {
           setFormData({
             name: "", priority: "", status: "", userId: "",
@@ -96,6 +102,7 @@ const TaskDialog = () => {
           setIsTaskDialogOpened(false);
         }}
           className="absolute right-3 top-[11.8px] text-2xl text-gray-600 active:scale-95 z-50 cursor-pointer hidden"/>
+        */}
           
           <DialogHeader>
             <DialogTitle className="text-xl">

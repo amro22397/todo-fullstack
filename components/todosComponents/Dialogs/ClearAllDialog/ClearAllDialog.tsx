@@ -13,70 +13,65 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "@/components/ui/alert-dialog"
+
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { revalidatePath } from "next/cache";
+import React, { useEffect, useState } from "react";
 
-export function DeleteDialog() {
-    /* const {
-      openDeleteDialog,
-      setOpenDeleteDialog,
-      taskSelected,
-      setTaskSelected,
-      deleteTaskFunction,
-      isLoading,
-      tasks,
-    } = useTasksStore(); */
-}
-
-    
-  // const { user } = useUserStore();
-
-
-const ClearAllDialog = ({openDeleteDialog, setOpenDeleteDialog, tasks}: {
-  openDeleteDialog: boolean, setOpenDeleteDialog: any, tasks: Task[]
+const ClearAllDialog = ({tasks}: {
+   tasks: Task[]
 }) => {
-
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     
 
-    const deleteFunction = async () => {
+    const deleteFunction = async (e: React.MouseEvent) => {
+
+      e.preventDefault();
+
+      setIsLoading(true)
+      axios.delete("/api/tasks")
+      .then(() => {
+        toast({
+          title: "All tasks deleted successfully"
+        })
+      })
+      .then(() => {
+        setOpenDeleteDialog(false)
+        window.location.reload();
+      })
+      .catch((error) => {
+        toast({
+          title: `${error}`
+        })
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
       
     }
 
   return (
-    <AlertDialog open={openDeleteDialog} onOpenChange={() => setOpenDeleteDialog(true)}>
-      <AlertDialogTrigger disabled={tasks.length === 0}>
-        <Button variant="link" disabled={tasks.length === 0}>
-          Clear All
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent className="p-7">
-        <AlertDialogHeader>
-          <AlertDialogTitle className="text-xl">
-            Are you absolutely sure?
-          </AlertDialogTitle>
-          <AlertDialogDescription className="mt-7">
-            {message}
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter className="mt-7">
-          <AlertDialogCancel
-            onClick={() => {
-              // setTaskSelected(null);
-              setOpenDeleteDialog(false);
-            }}
-          >
-            Cancel
-          </AlertDialogCancel>
-          <AlertDialogAction onClick={deleteFunction}>
-            {isLoading ? "Loading..." : "Delete"}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <AlertDialog open={openDeleteDialog} /* onOpenChange={() => setOpenDeleteDialog(true)} */>
+  <AlertDialogTrigger onClick={() => setOpenDeleteDialog(true)}>Clear All</AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you sure you want to delete all tasks?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your all tasks..
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel onClick={() => setOpenDeleteDialog(false)}>Cancel</AlertDialogCancel>
+      <AlertDialogAction onClick={deleteFunction}>Delete</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+
   )
 }
 

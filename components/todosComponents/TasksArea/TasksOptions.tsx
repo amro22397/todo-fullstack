@@ -89,6 +89,7 @@ const TasksOptions = ({ singleTask, id }: { singleTask: Task, id: string }) => {
     })
     .then(() => {
       setIsTaskDialogOpened(false);
+      window.location.reload();
     })
     .catch((error) => {
       toast({

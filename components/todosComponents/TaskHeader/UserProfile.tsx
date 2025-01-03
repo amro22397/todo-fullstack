@@ -12,23 +12,45 @@ import {
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa6";
+// import { LogoutButton } from "@/LogoutBtn";
+// import { useUserStore } from "@/app/stores/useUserStore";
 import { useTheme } from "next-themes";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { signOut, useSession } from "next-auth/react";
+
+
 
 
 const UserProfile = () => {
 
+  const session = useSession();
+
   const [open, setOpen] = useState(false);
-  // const { user } = useUserStore();
   const { theme, setTheme } = useTheme();
 
   const [checked, setChecked] = useState(false);
 
 
-  const handleDarkModeClick = () => {
+  const handleDarkModeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
 
+    if (!checked) {
+      setTheme("dark");
+      setChecked(true);
+    } else {
+      setTheme("light");
+      setChecked(false);
+    }
   }
+
+  useEffect(() => {
+    if (theme === "dark") {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
+  }, []);
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -37,12 +59,12 @@ const UserProfile = () => {
           <FaRegUser className="text-[20px]" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px]">
-        <DropdownMenuLabel className="text-lg text-gray-600">
-          {/* {user?.email} */}
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel className="text-gray-600 text-sm">
+          {session.data?.user?.email}
         </DropdownMenuLabel>
 
-        <DropdownMenuGroup>
+        <DropdownMenuGroup className="hover:bg-transparent">
           <DropdownMenuSeparator />
           {/* Dark Mode Item */}
           <DropdownMenuItem
@@ -58,9 +80,12 @@ const UserProfile = () => {
           </DropdownMenuItem>
 
           {/* Log out item */}
-          <DropdownMenuItem>
-            {/* <LogoutButton /> */}
-          </DropdownMenuItem>
+          <DropdownMenuLabel>
+          <Button variant="outline" onClick={() => signOut({callbackUrl: '/'})}
+          className="border-none bg-red-600 text-white hover:bg-red-500
+           font-semibold hover:text-white active:scale-95">Logout</Button>
+          </DropdownMenuLabel>
+
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

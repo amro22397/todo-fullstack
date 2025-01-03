@@ -18,13 +18,13 @@ const TaskHeader = () => {
 function AppLogo() {
     return (
       <div className="flex gap-2 items-center justify-center    ">
-        <div className="bg-primary p-2 text-white rounded-sm text-xl ">
+        <div className="bg-primary p-2 text-white rounded-sm text-xl hidden">
           <FaCheckDouble />
         </div>
   
         <div className="font-bold  text-3xl flex gap-1 justify-center items-center">
-          <span className="text-primary">Quick</span>
-          <span>Task</span>
+          <span className="text-primary">Todo</span>
+          <span>App</span>
         </div>
       </div>
     );

@@ -7,20 +7,33 @@ import TasksFooter from "../../components/todosComponents/TaskFooter/TaskFooter"
 import TasksDialog from "../../components/todosComponents/Dialogs/TaskDialog/TaskDialog";
 import mongoose from "mongoose";
 import { Tasks } from "@/models/tasks";
+import { User } from "@/models/user";
+import { revalidatePath } from "next/cache";
+import { getServerSession } from "next-auth";
+import { authConfig } from "@/lib/auth";
 
 
 const page = async () => {
 
+  async function getSession() {
+    return await getServerSession(authConfig);
+  }
+
+  const session = await getSession();
+  console.log(session);
+  console.log(session?.user?.email)
+
     mongoose.connect(process.env.MONGO_URL as string)
-    const tasks = await Tasks.find({});
+    const tasks = await Tasks.find({userEmail: {$in: [session?.user?.email]}}, {}, {sort: {createdAt: -1}});
+    
 
     console.log(tasks);
 
   return (
     <div className="min-h-screen border flex items-center w-full justify-center poppins  ">
       <div
-        className="w-[55%] border border-gray-400 flex flex-col gap-6 bg-inherit shadow-md 
-      rounded-md p-8"
+        className="border border-gray-400 flex flex-col gap-6 bg-inherit shadow-md 
+      rounded-md py-6 sm:px-8 px-4 w-[98%] sm:w-[85%] md:w-[70%] lg:w-[60%] xl:w-[55%]"
       >
         <TaskHeader  />
         <Stats tasks={tasks}/>
