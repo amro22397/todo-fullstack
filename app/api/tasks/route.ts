@@ -25,7 +25,6 @@ export async function PUT(request: Request) {
     return Response.json(task);
 }
 
-
 export async function DELETE() {
     mongoose.connect(process.env.MONGO_URL as string)
 

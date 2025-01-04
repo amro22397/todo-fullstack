@@ -123,11 +123,14 @@ const SignUp = () => {
       setLoading(true);
       if (formData.password !== confirmPassword) {
         toast({
+          variant: "destructive",
           title: "Passwords do not match",
         })
         setLoading(false);
         return;
       }
+
+
 
       axios.post("/api/register", formData).then(() => {
         toast({

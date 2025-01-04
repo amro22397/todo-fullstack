@@ -14,6 +14,7 @@ import { FaUmbrellaBeach } from "react-icons/fa6";
 import { useSession } from "next-auth/react";
 import mongoose from "mongoose";
 import { Tasks } from "@/models/tasks";
+import CheckBoxComponent from "./CheckBoxComponent";
 
 
 // import { useUserStore } from "@/app/stores/useUserStore";
@@ -47,15 +48,8 @@ const TasksArea = ({ tasks }: {tasks: Task[]}) => {
 
 export async function SingleTask({ singleTask, id }: { singleTask: Task, id: string }) {
 
-//  const { updateTaskFunction, setTaskSelected, setIsTaskDialogOpened } = useTasksStore();
   console.log(id);
-  const handleCheckboxChange = () => {
-
-    const updateTaskObject: Task = {
-      ...singleTask,
-      status: singleTask.status === "completed" ? "in progress" : "completed"
-    }
-  }
+  
 
   mongoose.connect(process.env.MONGO_URL as string)
       const task = await Tasks.findOne({_id: id});
@@ -67,25 +61,13 @@ export async function SingleTask({ singleTask, id }: { singleTask: Task, id: str
 
   return (
     <div
-      className={`border flex items-center p-3 rounded-md w-full justify-between mb-3 ${lowerOpacity}`}
+      className={`flex items-center px-0 my-5 rounded-md w-full justify-between mb-0 ${lowerOpacity}`}
     >
-      <div className="flex items-center gap-2">
-        {/*
-        {loading ? (
-          <CircularProgress size="sm" color="primary" />
-        ) : (
-          <>
-          <Checkbox
-            id={`task-${singleTask.id}`}
-            className="w-5 h-5"
-            checked={singleTask.status === "completed"}
-            onCheckedChange={handleCheckboxChange}
-          />
-          </>
-        )}
-        */}
+      <div className="flex items-center gap-4">
 
-        <div className="flex flex-col gap-1">
+        <CheckBoxComponent singleTask={singleTask} />
+
+        <div className="flex flex-row gap-[6px] items-center justify-center">
         <label
            /* onClick={() => {
               //setTaskSelected(singleTask);

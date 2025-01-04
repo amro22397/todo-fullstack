@@ -11,6 +11,7 @@ import { User } from "@/models/user";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
+import LoginPage from "@/components/signIn/SignIn";
 
 
 const page = async () => {
@@ -28,6 +29,16 @@ const page = async () => {
     
 
     console.log(tasks);
+
+
+    if (!session?.user?.email) {
+      return (
+        <div className='flex justify-center items-center h-screen poppins'>
+              <LoginPage />
+              <div className=""></div>
+            </div>
+      )
+    }
 
   return (
     <div className="min-h-screen border flex items-center w-full justify-center poppins  ">
