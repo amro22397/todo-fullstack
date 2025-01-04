@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import EditDeleteTaskList from './EditDeleteTaskList'
+import Link from 'next/link'
 
 
 const SideBar = async () => {
@@ -33,7 +34,7 @@ const SideBar = async () => {
         border-gray-200 px-[11px] flex flex-col gap-4">
             <AppLogo className="mt-5"/>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
             <div className="flex flex-row justify-between items-center">
             <h2 className="text-lg text-gray-700">Tasks List</h2>
 
@@ -44,11 +45,13 @@ const SideBar = async () => {
             <ul className="flex flex-col mx-2 gap-3">
               {tasksList.map((tasklist, index) => (
                 <div className="flex flex-row justify-between items-center">
-                  <li key={index} className="">
+                  <Link key={index} href={`/to-dos/${tasklist._id}`}
+                  className="cursor-pointer font-semibold tracking-wider hover:text-gray-600
+                  text-sm">
                   {tasklist.name}
-                </li>
+                </Link>
 
-                <EditDeleteTaskList />
+                <EditDeleteTaskList tasklist={tasklist} />
                 
                 </div>
               ))}

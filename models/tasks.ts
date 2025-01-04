@@ -19,6 +19,9 @@ const TasksSchema = new Schema({
     userId: {
         type: String,
     },
+    taskListId: {
+        type: String,
+    },
 }, { timestamps: true });
 
 

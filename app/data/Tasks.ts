@@ -7,6 +7,13 @@ export type Task = {
     userId: string;
   };
 
+  export type TaskList = {
+    _id: string;
+    name: string;
+    userId: string;
+    userEmail: string;
+  }
+
   export const allTasks: Task[] = [
     //
   ];

@@ -10,3 +10,15 @@ export async function POST(request: Request) {
 
     return Response.json(taskList);
 }
+
+
+export async function PUT(request: Request) {
+    mongoose.connect(process.env.MONGO_URL as string)
+
+    const body = await request.json();
+    const { id, ...formData } = body
+
+    const taskList = await TasksList.findByIdAndUpdate(id, formData);
+
+    return Response.json(taskList);
+}
