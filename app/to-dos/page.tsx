@@ -21,6 +21,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button";
+import { FaUmbrellaBeach } from "react-icons/fa";
 
 
 
@@ -60,10 +62,21 @@ const page = async () => {
 
 
         <TaskHeader  />
+        
+        
+        <div className="  h-full w-full flex items-center justify-center  flex-col gap-2">
+                 {/*  <FaUmbrellaBeach className="text-[79px] text-slate-500 opacity-85" /> */}
+
+                 <span className="font-semibold tracking-wide">Welcome to Todo App</span>
+                  <span className="text-sm text-slate-600">Click on or add a list to start adding tasks</span>
+                </div>
+
+        {/*
         <Stats tasks={tasks}/>
         <AllTasksHeader />
         <TasksArea tasks={tasks}  />
         <TasksFooter tasks={tasks} />
+        */}
       </div>
     </div>
   )

@@ -11,18 +11,19 @@ type SingleStat = { label: string; unit: string; counter: number };
 
 const Stats = ({tasks} : { tasks: Task[] }) => {
 
+  const getCompletedTasks = tasks.filter(task => task.status === "completed").length;
+
+        const getPendingTasks = tasks.length - getCompletedTasks;
+    const getProgressValue = (getCompletedTasks / tasks.length) * 100;
+
     const [statsArray, setStatsArray] = useState<SingleStat[]>([
-        { label: "Completed", unit: "Tasks", counter: 3 },
-        { label: "Pending", unit: "Tasks", counter: 4 },
-        { label: "Progress", unit: "%", counter: 4 },
+        { label: "Completed", unit: "Tasks", counter: getCompletedTasks },
+        { label: "Pending", unit: "Tasks", counter: getPendingTasks },
+        { label: "Progress", unit: "%", counter: getProgressValue },
       ]);
 
       
-      useEffect(() => {
-        const getCompletedTasks = tasks.filter(task => task.status === "completed").length;
-
-        const getPendingTasks = tasks.length - getCompletedTasks;
-    const getProgressValue = (getCompletedTasks / tasks.length) * 100; 
+      useEffect(() => { 
 
     setStatsArray([
       { label: "Completed", unit: "Tasks", counter: getCompletedTasks },

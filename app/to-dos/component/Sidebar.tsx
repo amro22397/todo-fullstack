@@ -28,6 +28,7 @@ const SideBar = async () => {
 
   const taskListIconSize = 17;
   const taskListButtonClassName = "cursor-pointer active:scale-95"
+  
 
   return (
     <div className="bg-gray-50 w-[300px] h-screen border-r border-solid
@@ -38,7 +39,7 @@ const SideBar = async () => {
             <div className="flex flex-row justify-between items-center">
             <h2 className="text-lg text-gray-700">Tasks List</h2>
 
-            <TaskListAddDialog />
+            <TaskListAddDialog tasksList={tasksList} />
             
             </div>
 
@@ -51,7 +52,7 @@ const SideBar = async () => {
                   {tasklist.name}
                 </Link>
 
-                <EditDeleteTaskList tasklist={tasklist} />
+                <EditDeleteTaskList tasklist={tasklist} tasksList={tasksList} />
                 
                 </div>
               ))}

@@ -31,12 +31,20 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
+import { usePathname, useRouter } from 'next/navigation'
 
   
 
-const EditDeleteTaskList = ({ tasklist }: { tasklist: TaskList}) => {
+const EditDeleteTaskList = ({ tasklist, tasksList }: {
+  tasklist: TaskList, tasksList: TaskList[]
+}) => {
 
     const session = useSession();
+    const router = useRouter();
+
+    const pathname = usePathname();
+    console.log(pathname);
+    console.log(pathname.includes(tasklist._id))
 
     const taskListIconSize = 17;
   const taskListButtonClassName = "cursor-pointer active:scale-95"
@@ -58,6 +66,7 @@ const EditDeleteTaskList = ({ tasklist }: { tasklist: TaskList}) => {
             userEmail: session?.data?.user?.email || "",
         })
       }, [openEditDialog]);
+
 
   const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -93,14 +102,18 @@ const EditDeleteTaskList = ({ tasklist }: { tasklist: TaskList}) => {
 
     axios.delete(`/api/tasks-list/${tasklist._id}`)
     .then(() => {
-        setDeleteDialog(false);
-        toast({
-            title: "Task List deleted successfully"
-        })
+      setDeleteDialog(false);
+        window.location.reload();
+        if (pathname.includes(tasklist._id)) {
+          const id = tasksList[0]._id;
+          router.push(`/to-dos/${id}`)
+        }
     })
     .then(() => {
-        window.location.reload();
-    })
+      toast({
+          title: "Task List deleted successfully"
+      })
+  })
     .catch((error) => {
         toast({
             title: `${error}`
@@ -110,6 +123,12 @@ const EditDeleteTaskList = ({ tasklist }: { tasklist: TaskList}) => {
         setLoading(false)
     })
   }
+
+  /* useEffect(() => {
+        if (tasksList.length === 0) {
+          router.push('/to-dos');
+        }
+      }, [deleteDialog]); */
 
   console.log(formData)
   return (

@@ -29,7 +29,7 @@ import axios from "axios";
 import { AppContext } from "@/context/AppContext";
 // import { useUserStore } from "@/app/stores/useUserStore";
 
-const TaskDialog = () => {
+const TaskDialog = ({ taskListId }: { taskListId?: string}) => {
 
   const session = useSession();
   console.log(session?.data?.user?.email)
@@ -39,6 +39,7 @@ const TaskDialog = () => {
       priority : "",
       status: "",
       userEmail: session?.data?.user?.email || "",
+      taskListId: taskListId || "",
       userId: "",
     });
 
@@ -53,6 +54,7 @@ const TaskDialog = () => {
       priority : "",
       status: "",
       userEmail: session?.data?.user?.email || "",
+      taskListId: taskListId || "",
       userId: "",
       })
     }, [isTaskDialogOpened]);

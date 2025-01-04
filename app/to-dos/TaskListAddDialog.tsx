@@ -17,11 +17,16 @@ import { Plus } from 'lucide-react';
 import axios from 'axios'
 import { toast } from '@/hooks/use-toast'
 import { useSession } from 'next-auth/react'
+import { TaskList } from '../data/Tasks'
+import { useRouter } from 'next/navigation'
 
 
-const TaskListAddDialog = () => {
+const TaskListAddDialog = ({ tasksList }: { tasksList: TaskList[]}) => {
 
   const session = useSession();
+  const router = useRouter();
+
+  console.log(tasksList.length);
 
     const [isAddTaskListDialogOpen, setIsAddTaskListDialogOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -64,6 +69,13 @@ const TaskListAddDialog = () => {
       })
 
     }
+
+
+    useEffect(() => {
+            if (tasksList.length === 0) {
+              router.push('/to-dos');
+            }
+          }, [isAddTaskListDialogOpen]);
 
     console.log(formData)
 

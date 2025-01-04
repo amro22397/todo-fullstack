@@ -12,20 +12,40 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
 import LoginPage from "@/components/signIn/SignIn";
+import { TasksList } from "@/models/tasks-list";
+import { headers } from "next/headers";
 
+interface TaskListId {
+  id: string;
+}
 
-const page = async () => {
+const page = async ({ params }: { params: TaskListId}) => {
 
   async function getSession() {
     return await getServerSession(authConfig);
   }
+
+  const heads = headers();
+
+  const pathname = heads.get('referer');
+
+  console.log(params.id);
+  console.log(pathname);
+
 
   const session = await getSession();
   console.log(session);
   console.log(session?.user?.email)
 
     mongoose.connect(process.env.MONGO_URL as string)
-    const tasks = await Tasks.find({userEmail: {$in: [session?.user?.email]}}, {}, {sort: {createdAt: -1}});
+    const tasks = await Tasks.find({
+      userEmail: {$in: [session?.user?.email]},
+      taskListId: {$in: [params.id]},
+    }, {}, {sort: {createdAt: -1}});
+
+
+    mongoose.connect(process.env.MONGO_URL as string)
+      const tasksList = await TasksList.find({userEmail: {$in: [session?.user?.email]}})
     
 
     console.log(tasks);
@@ -48,15 +68,15 @@ const page = async () => {
       >
         <TaskHeader  />
         <Stats tasks={tasks}/>
-        <AllTasksHeader />
-        <TasksArea tasks={tasks}  />
+        <AllTasksHeader taskListId={params.id} />
+        <TasksArea tasks={tasks} tasksList={tasksList}  />
         <TasksFooter tasks={tasks} />
       </div>
     </div>
   )
 }
 
-function AllTasksHeader() {
+function AllTasksHeader({ taskListId }: { taskListId: string}) {
 
   
   return (
@@ -67,7 +87,7 @@ function AllTasksHeader() {
       </div>
 
       
-      <TasksDialog />
+      <TasksDialog taskListId={taskListId} />
       
     </div>
   );
