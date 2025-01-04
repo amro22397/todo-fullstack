@@ -68,7 +68,7 @@ const page = async () => {
                  {/*  <FaUmbrellaBeach className="text-[79px] text-slate-500 opacity-85" /> */}
 
                  <span className="font-semibold tracking-wide">Welcome to Todo App</span>
-                  <span className="text-sm text-slate-600">Click on or add a list to start adding tasks</span>
+                  <span className="text-sm text-slate-600 text-center">Click on or add a list on the sidebar<br /> to start adding tasks</span>
                 </div>
 
         {/*

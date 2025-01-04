@@ -2,12 +2,16 @@ import UserProfile from "./UserProfile";
 
 import SearchButton from "./SearchButton";
 import { FaCheckDouble } from "react-icons/fa6";
+import { TaskList } from "@/app/data/Tasks";
 
-const TaskHeader = () => {
+const TaskHeader = ({ pagetaskList }: {pagetaskList?: TaskList}) => {
   return (
     <div className="flex justify-between  items-center mb-6">
       <AppLogo />
-      <div className="flex items-center gap-1 ">
+      <div className="flex items-center ">
+      <div className="flex flex-col gap-0 mr-3">
+          <span className="font-semibold">{pagetaskList?.name}</span>
+        </div>
         <SearchButton />
         <UserProfile />
       </div>

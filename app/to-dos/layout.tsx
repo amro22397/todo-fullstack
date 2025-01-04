@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
@@ -30,7 +31,7 @@ export default function RootLayout({
       <body
         className={poppins.variable}
       >
-        <div className="flex flex-row">
+        <div className="flex md:flex-row flex-col">
         <SideBar />
         {children}
         </div>

@@ -4,7 +4,7 @@ import TaskListAddDialog from '../TaskListAddDialog'
 import mongoose from 'mongoose'
 import { TasksList } from '@/models/tasks-list'
 import { getSession } from '@/app/actions/getSession'
-import { Edit, Trash } from 'lucide-react'
+import { Edit, Trash, X } from 'lucide-react'
 
 
 import {
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog"
 import EditDeleteTaskList from './EditDeleteTaskList'
 import Link from 'next/link'
+import CloseSidebar from './CloseSidebar'
 
 
 const SideBar = async () => {
@@ -31,8 +32,12 @@ const SideBar = async () => {
   
 
   return (
-    <div className="bg-gray-50 w-[300px] h-screen border-r border-solid
+    <div className="bg-gray-50 max-md:z-50
+    md:w-[300px] md:h-screen border-r border-solid
+    
         border-gray-200 px-[11px] flex flex-col gap-4">
+
+
             <AppLogo className="mt-5"/>
 
             <div className="flex flex-col gap-3">

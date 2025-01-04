@@ -57,7 +57,7 @@ function SingleStatCard({ stat }: { stat: SingleStat }) {
   return (
     <div className="w-full flex flex-col gap-2 items-center ">
       <div className="flex justify-between items-center">
-        <p className="sm:text-xl text-md font-medium text-gray-500">{stat.label}</p>
+        <p className="lg:text-xl text-lg font-medium text-gray-500">{stat.label}</p>
       </div>
       <div className="flex gap-1  items-baseline  ">
         <p className="text-3xl font-bold mt-1 ">{stat.counter}</p>

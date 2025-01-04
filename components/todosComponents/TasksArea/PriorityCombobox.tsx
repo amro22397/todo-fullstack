@@ -19,6 +19,7 @@ import {
 import { Task } from "@/app/data/Tasks";
 // import { useTasksStore } from "@/app/stores/useTasksStore";
 import { toast } from "@/hooks/use-toast";
+import axios from "axios";
 
 const priorities = [
   {
@@ -47,20 +48,31 @@ const PriorityCombobox = ({ singleTask }: { singleTask: Task }) => {
     setValue(singleTask.priority);
   }, [singleTask]);
 
-  
-  function isValidPriority(value: string) {
-    return value === "low" || value === "medium" || value === "high";
-  }
+  const onSelectFunction = (value: string) => {
+    setValue(value)
 
-  function onSelectFunction(currentValue: string) {
-    if (!isValidPriority(currentValue)) {
-      return;
+    setIsLoading(true);
+
+    if (singleTask.priority !== value) {
+      axios.put("/api/task-priority", {id: singleTask._id, priority: value})
+      .then(() => {
+        toast({
+          title: "Priority updated successfully"
+        })
+      })
+      .then(() => {
+        setIsLoading(true);
+        window.location.reload();
+      })
+      .catch((error) => {
+        toast({
+          title: `${error}`
+        })
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
     }
-
-    const updatedTask: Task = { ...singleTask, priority: currentValue };
-
-    setValue(currentValue);
-    setOpen(false);
   }
 
   return (

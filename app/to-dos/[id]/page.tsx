@@ -41,11 +41,14 @@ const page = async ({ params }: { params: TaskListId}) => {
     const tasks = await Tasks.find({
       userEmail: {$in: [session?.user?.email]},
       taskListId: {$in: [params.id]},
-    }, {}, {sort: {createdAt: -1}});
+    }, {}, {sort: {createdAt: 1}});
 
 
     mongoose.connect(process.env.MONGO_URL as string)
       const tasksList = await TasksList.find({userEmail: {$in: [session?.user?.email]}})
+
+      mongoose.connect(process.env.MONGO_URL as string)
+      const pagetaskList = await TasksList.findOne({_id: {$in: [params.id]}});
     
 
     console.log(tasks);
@@ -61,12 +64,12 @@ const page = async ({ params }: { params: TaskListId}) => {
     }
 
   return (
-    <div className="min-h-screen border flex items-center w-full justify-center poppins  ">
+    <div className="border flex items-center w-full justify-center poppins md:min-h-screen my-10  ">
       <div
         className="border border-gray-400 flex flex-col gap-6 bg-inherit shadow-md 
       rounded-md py-6 sm:px-8 px-4 w-[98%] sm:w-[85%] md:w-[70%] lg:w-[60%] xl:w-[55%]"
       >
-        <TaskHeader  />
+        <TaskHeader pagetaskList={pagetaskList} />
         <Stats tasks={tasks}/>
         <AllTasksHeader taskListId={params.id} />
         <TasksArea tasks={tasks} tasksList={tasksList}  />
