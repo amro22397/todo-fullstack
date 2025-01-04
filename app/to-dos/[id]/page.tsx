@@ -1,10 +1,10 @@
 
 
-import TaskHeader from "../../components/todosComponents/TaskHeader/TaskHeader";
-import Stats from "../../components/todosComponents/Stats/StatsStats";
-import TasksArea from "../../components/todosComponents/TasksArea/TasksArea";
-import TasksFooter from "../../components/todosComponents/TaskFooter/TaskFooter";
-import TasksDialog from "../../components/todosComponents/Dialogs/TaskDialog/TaskDialog";
+import TaskHeader from "../../../components/todosComponents/TaskHeader/TaskHeader";
+import Stats from "../../../components/todosComponents/Stats/StatsStats";
+import TasksArea from "../../../components/todosComponents/TasksArea/TasksArea";
+import TasksFooter from "../../../components/todosComponents/TaskFooter/TaskFooter";
+import TasksDialog from "../../../components/todosComponents/Dialogs/TaskDialog/TaskDialog";
 import mongoose from "mongoose";
 import { Tasks } from "@/models/tasks";
 import { User } from "@/models/user";
@@ -12,16 +12,6 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
 import LoginPage from "@/components/signIn/SignIn";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-
 
 
 const page = async () => {
@@ -56,9 +46,6 @@ const page = async () => {
         className="border border-gray-400 flex flex-col gap-6 bg-inherit shadow-md 
       rounded-md py-6 sm:px-8 px-4 w-[98%] sm:w-[85%] md:w-[70%] lg:w-[60%] xl:w-[55%]"
       >
-
-
-
         <TaskHeader  />
         <Stats tasks={tasks}/>
         <AllTasksHeader />

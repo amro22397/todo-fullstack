@@ -36,12 +36,12 @@ const ClearAllDialog = ({tasks}: {
       setIsLoading(true)
       axios.delete("/api/tasks")
       .then(() => {
+        setOpenDeleteDialog(false)
+      })
+      .then(() => {
         toast({
           title: "All tasks deleted successfully"
         })
-      })
-      .then(() => {
-        setOpenDeleteDialog(false)
         window.location.reload();
       })
       .catch((error) => {
@@ -57,7 +57,8 @@ const ClearAllDialog = ({tasks}: {
 
   return (
     <AlertDialog open={openDeleteDialog} /* onOpenChange={() => setOpenDeleteDialog(true)} */>
-  <AlertDialogTrigger onClick={() => setOpenDeleteDialog(true)}>Clear All</AlertDialogTrigger>
+  <AlertDialogTrigger onClick={() => setOpenDeleteDialog(true)} 
+  className="cursor-pointer">Clear All</AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>Are you sure you want to delete all tasks?</AlertDialogTitle>

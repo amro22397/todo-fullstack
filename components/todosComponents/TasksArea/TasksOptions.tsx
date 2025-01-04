@@ -110,13 +110,14 @@ const TasksOptions = ({ singleTask, id }: { singleTask: Task, id: string }) => {
 
     axios.delete(`/api/tasks/${singleTask?._id}`)
     .then(() => {
+      setIsDropdownOpen(false);
+      setIsAlertDialogOpen(false)
+      window.location.reload();
+    })
+    .then(() => {
       toast({
         title: "Task deleted successfully"
       })
-    })
-    .then(() => {
-      setIsDropdownOpen(false);
-      setIsAlertDialogOpen(false)
     })
     .catch((error) => {
       toast({
