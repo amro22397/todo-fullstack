@@ -23,14 +23,11 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
 import { FaUmbrellaBeach } from "react-icons/fa";
+import getSession from "../actions/getSession";
 
 
 
 const page = async () => {
-
-  async function getSession() {
-    return await getServerSession(authConfig);
-  }
 
   const session = await getSession();
   console.log(session);

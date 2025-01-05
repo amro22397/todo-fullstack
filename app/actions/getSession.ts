@@ -1,6 +1,6 @@
 import { authConfig } from "@/lib/auth"
 import { getServerSession } from "next-auth"
 
-export const getSession = async () => {
+export default async function getSession() {
     return await getServerSession(authConfig);
-}
+  }
