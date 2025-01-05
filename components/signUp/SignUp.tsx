@@ -25,7 +25,6 @@ import { signIn, useSession } from "next-auth/react";
 
 import { useState } from "react";
 
-import { auth, googleProvider } from "@/firebase";
 import { signInWithPopup } from "firebase/auth";
 
 import axios from "axios";
@@ -111,7 +110,7 @@ const SignUp = () => {
 
     const handleSignUpWithGoogle = async (e:any) => {
     e.preventDefault();
-    signIn('google', {callbackUrl: '/to-dos'})
+    signIn('google', {callbackUrl: '/'})
 
 
     }
