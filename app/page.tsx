@@ -19,6 +19,7 @@ const page = () => {
       <LoginPage />
       <div className=""></div>
       <div className=""></div>
+      <div></div>
     </div>
   )
 }
