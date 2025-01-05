@@ -6,7 +6,7 @@ import GoogleProvider from "next-auth/providers/google"
 import { User } from "@/models/user";
 import bcrypt from "bcrypt"
 
-export const authConfig: AuthOptions = {
+export const authConfig = {
     secret: process.env.NEXTAUTH_SECRET,
 
     providers: [
@@ -27,7 +27,7 @@ export const authConfig: AuthOptions = {
                 if (!credentials || !credentials.email || !credentials.password)
                     return null;
 
-                mongoose.connect(process.env.MONGO_URL as string);
+                mongoose.connect(process.env.MONGO_URL);
                 const dbUser = await User.findOne({email: credentials.email})
 
                 if (!dbUser || !dbUser?.hashedPassword) {
@@ -50,8 +50,8 @@ export const authConfig: AuthOptions = {
 
 
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
     ],
 
