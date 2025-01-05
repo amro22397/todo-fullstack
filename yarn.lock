@@ -3714,7 +3714,7 @@ mongodb-connection-string-url@^3.0.0:
 
 mongodb@^6.12.0, mongodb@~6.12.0:
   version "6.12.0"
-  resolved "https://registry.npmjs.org/mongodb/-/mongodb-6.12.0.tgz"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.12.0.tgz#8b0bda1b18cbb3f0aec8ab4119c5dc535a43c444"
   integrity sha512-RM7AHlvYfS7jv7+BXund/kR64DryVI+cHbVAy9P61fnb1RcWZqOW1/Wj2YhqMCx+MuYhqTRGv7AwHBzmsCKBfA==
   dependencies:
     "@mongodb-js/saslprep" "^1.1.9"
@@ -3723,7 +3723,7 @@ mongodb@^6.12.0, mongodb@~6.12.0:
 
 mongoose@^8.9.3:
   version "8.9.3"
-  resolved "https://registry.npmjs.org/mongoose/-/mongoose-8.9.3.tgz"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.9.3.tgz#770a990f6992884a8a858c90f1be6862054e6fbc"
   integrity sha512-G50GNPdMqhoiRAJ/24GYAzg13yxXDD3FOOFeYiFwtHmHpAJem3hxbYIxAhLJGWbYEiUZL0qFMu2LXYkgGAmo+Q==
   dependencies:
     bson "^6.10.1"
@@ -3772,7 +3772,7 @@ natural-compare@^1.4.0:
 
 next-auth@^4.24.11:
   version "4.24.11"
-  resolved "https://registry.npmjs.org/next-auth/-/next-auth-4.24.11.tgz"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.24.11.tgz#16eeb76d37fbc8fe887561b454f8167f490c381f"
   integrity sha512-pCFXzIDQX7xmHFs4KVH4luCjaCbuPRtZ9oBUjUhOk84mZ9WVPf94n87TxYI4rSRf9HmfHEF8Yep3JrYDVOo3Cw==
   dependencies:
     "@babel/runtime" "^7.20.13"
