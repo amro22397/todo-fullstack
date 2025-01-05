@@ -33,9 +33,9 @@ const SideBar = async () => {
 
   return (
     <div className="bg-gray-50 max-md:z-50
-    md:w-[300px] md:h-screen border-r border-solid
+    md:w-[400px] md:h-screen border-r border-solid px-3 sm:px-14
     
-        border-gray-200 px-[11px] flex flex-col gap-4">
+        border-gray-200 md:px-[11px] flex flex-col gap-4">
 
 
             <AppLogo className="mt-5"/>
@@ -48,12 +48,12 @@ const SideBar = async () => {
             
             </div>
 
-            <ul className="flex flex-col mx-2 gap-3">
+            <ul className="flex flex-col mx-2 gap-3 max-md:mb-4">
               {tasksList.map((tasklist, index) => (
                 <div className="flex flex-row justify-between items-center">
                   <Link key={index} href={`/to-dos/${tasklist._id}`}
                   className="cursor-pointer font-semibold tracking-wider hover:text-gray-600
-                  text-sm">
+                  text-md">
                   {tasklist.name}
                 </Link>
 

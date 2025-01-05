@@ -19,7 +19,7 @@ const Stats = ({tasks} : { tasks: Task[] }) => {
     const [statsArray, setStatsArray] = useState<SingleStat[]>([
         { label: "Completed", unit: "Tasks", counter: getCompletedTasks },
         { label: "Pending", unit: "Tasks", counter: getPendingTasks },
-        { label: "Progress", unit: "%", counter: getProgressValue },
+        { label: "Progress", unit: "%", counter: parseInt(getProgressValue.toFixed(2)) || 0 },
       ]);
 
       
@@ -57,10 +57,10 @@ function SingleStatCard({ stat }: { stat: SingleStat }) {
   return (
     <div className="w-full flex flex-col gap-2 items-center ">
       <div className="flex justify-between items-center">
-        <p className="lg:text-xl text-lg font-medium text-gray-500">{stat.label}</p>
+        <p className="lg:text-xl md:text-sm text-xl font-medium text-gray-500">{stat.label}</p>
       </div>
-      <div className="flex gap-1  items-baseline  ">
-        <p className="text-3xl font-bold mt-1 ">{stat.counter}</p>
+      <div className="flex gap-1  items-baseline md:text-xs text-lg ">
+        <p className="text-3xl font-bold mt-1 md:text-2xl ">{stat.counter}</p>
         <p className="text-gray-400">{stat.unit}</p>
       </div>
     </div>
