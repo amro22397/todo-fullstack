@@ -50,8 +50,8 @@ const SideBar = async () => {
 
             <ul className="flex flex-col mx-2 gap-3 max-md:mb-4">
               {tasksList.map((tasklist, index) => (
-                <div className="flex flex-row justify-between items-center">
-                  <Link key={index} href={`/to-dos/${tasklist._id}`}
+                <div key={index} className="flex flex-row justify-between items-center">
+                  <Link href={`/to-dos/${tasklist._id}`}
                   className="cursor-pointer font-semibold tracking-wider hover:text-gray-600
                   text-md">
                   {tasklist.name}
