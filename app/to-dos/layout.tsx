@@ -28,11 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AppProvider session>
+    
         <div className="flex md:flex-row flex-col">
         <SideBar />
         {children}
         </div>
-        </AppProvider>
+        
   );
 }
