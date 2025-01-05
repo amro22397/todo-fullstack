@@ -24,14 +24,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { FaUmbrellaBeach } from "react-icons/fa";
 import { getSession } from "next-auth/react";
+import { getUser } from "../actions/getUser";
 
 
 
 const page = async () => {
 
-  const session = getSession();
-    console.log(session);
-  console.log(session?.user?.email)
+  const session = await getUser();
 
     mongoose.connect(process.env.MONGO_URL as string)
     const tasks = await Tasks.find({userEmail: {$in: [session?.user?.email]}}, {}, {sort: {createdAt: -1}});
@@ -42,7 +41,7 @@ const page = async () => {
     console.log(tasks);
 
 
-    if (!session?.user?.email) {
+    if (false) {
       return (
         <div className='flex justify-center items-center h-screen poppins'>
               <LoginPage />
@@ -57,9 +56,6 @@ const page = async () => {
         className="border border-gray-400 flex flex-col gap-6 bg-inherit shadow-md 
       rounded-md py-6 sm:px-8 px-4 w-[98%] sm:w-[85%] md:w-[70%] lg:w-[60%] xl:w-[55%]"
       >
-
-      <div>{JSON.stringify(session, null, 2)}</div>
-
 
         <TaskHeader  />
         

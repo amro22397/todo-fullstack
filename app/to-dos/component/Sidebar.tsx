@@ -3,7 +3,7 @@ import React from 'react'
 import TaskListAddDialog from '../TaskListAddDialog'
 import mongoose from 'mongoose'
 import { TasksList } from '@/models/tasks-list'
-import { getSession } from '@/app/actions/getSession'
+import { getSession } from '@/app/actions/getUser'
 import { Edit, Trash, X } from 'lucide-react'
 
 
