@@ -12,7 +12,6 @@ const SearchButton = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        
           <IoSearchSharp className="text-[20px]" />
       </PopoverTrigger>
       <PopoverContent>
