@@ -25,13 +25,6 @@ const page = async ({ params }: { params: TaskListId}) => {
     return await getServerSession(authConfig);
   }
 
-  const heads = headers();
-
-  const pathname = heads.get('referer') as any;
-
-  console.log(params.id);
-  console.log(pathname);
-
 
   const session = await getSession();
   console.log(session);
