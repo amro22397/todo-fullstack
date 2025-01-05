@@ -23,7 +23,7 @@ interface TaskListId {
 
 const page = async ({ params }: { params: TaskListId}) => {
 
-  const session = await getUser();
+  const session = await getServerSession(authConfig);
   console.log(session);
 
     mongoose.connect(process.env.MONGO_URL as string)

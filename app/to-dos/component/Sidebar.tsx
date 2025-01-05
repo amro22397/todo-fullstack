@@ -3,7 +3,6 @@ import React from 'react'
 import TaskListAddDialog from '../TaskListAddDialog'
 import mongoose from 'mongoose'
 import { TasksList } from '@/models/tasks-list'
-import { getSession } from '@/app/actions/getUser'
 import { Edit, Trash, X } from 'lucide-react'
 
 
@@ -19,11 +18,13 @@ import EditDeleteTaskList from './EditDeleteTaskList'
 import Link from 'next/link'
 import CloseSidebar from './CloseSidebar'
 import SidebarTaskLists from './SidebarTaskLists'
+import { getServerSession } from 'next-auth/next'
+import { authConfig } from '@/lib/auth'
 
 
 const SideBar = async () => {
 
-  const session = await getSession();
+  const session = await getServerSession(authConfig);
 
   mongoose.connect(process.env.MONGO_URL as string)
   const tasksList = await TasksList.find({userEmail: {$in: [session?.user?.email]}})

@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 import { Tasks } from "@/models/tasks";
 import { User } from "@/models/user";
 import { revalidatePath } from "next/cache";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authConfig } from "@/lib/auth";
 import LoginPage from "@/components/signIn/SignIn";
 
@@ -24,13 +24,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { FaUmbrellaBeach } from "react-icons/fa";
 import { getSession } from "next-auth/react";
-import { getUser } from "../actions/getUser";
 
 
 
 const page = async () => {
 
-  const session = await getUser();
+  const session = await getServerSession(authConfig);
+
+  console.log(session)
+
+  
 
     mongoose.connect(process.env.MONGO_URL as string)
     const tasks = await Tasks.find({userEmail: {$in: [session?.user?.email]}}, {}, {sort: {createdAt: -1}});

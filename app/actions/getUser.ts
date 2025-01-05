@@ -1,10 +1,12 @@
 import { authConfig } from "@/lib/auth"
 import { getServerSession } from "next-auth"
 
-export async function getSession() {
-    return await getServerSession(authConfig);
+export default async (req: any, res: any) => {
+    const session = await getServerSession(req, res, authConfig);
   }
 
+
+  /*
 
   export async function getUser() {
     try {
@@ -23,3 +25,5 @@ export async function getSession() {
 
     }
   }
+
+  */

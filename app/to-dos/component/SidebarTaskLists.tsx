@@ -1,9 +1,9 @@
 'use client'
 
 import { TaskList } from '@/app/data/Tasks'
-import { Link } from 'lucide-react'
 import React from 'react'
 import EditDeleteTaskList from './EditDeleteTaskList'
+import Link from 'next/link'
 
 const SidebarTaskLists = ({ tasksList }: { tasksList: TaskList[]}) => {
   return (
