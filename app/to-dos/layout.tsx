@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import TaskListAddDialog from "./TaskListAddDialog";
 import SideBar from "./component/Sidebar";
+import AppProvider from "@/AppContext";
 
 
 const poppins = Poppins({
@@ -27,9 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <AppProvider session>
         <div className="flex md:flex-row flex-col">
         <SideBar />
         {children}
         </div>
+        </AppProvider>
   );
 }
