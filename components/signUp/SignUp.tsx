@@ -110,7 +110,7 @@ const SignUp = () => {
 
     const handleSignUpWithGoogle = async (e:any) => {
     e.preventDefault();
-    signIn('google', {callbackUrl: '/'})
+    signIn('google', {callbackUrl: '/page'})
 
 
     }
