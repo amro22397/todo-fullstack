@@ -44,13 +44,6 @@ export const authConfig: NextAuthOptions = {
                     throw new Error("Invalid email or password");
                   }
 
-                /* if (dbUser && dbUser.hashedPassword === credentials.password) {
-                    const { hashedPassword, createdAt, _id, ...dbUserWithoutPassword } = dbUser;
-                    return dbUserWithoutPassword as any;
-                }
-
-                return null; */
-
                 return dbUser;
 
             },
@@ -61,5 +54,15 @@ export const authConfig: NextAuthOptions = {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         })
-    ]
+    ],
+
+    pages: {
+        signIn: "/",
+    },
+    debug: process.env.NODE_ENV === "development",
+
+    session: {
+        strategy: "jwt",
+    },
+    
 }
