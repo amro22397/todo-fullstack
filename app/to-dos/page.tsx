@@ -38,6 +38,8 @@ const page = async () => {
 
     mongoose.connect(process.env.MONGO_URL as string)
     const tasks = await Tasks.find({userEmail: {$in: [session?.user?.email]}}, {}, {sort: {createdAt: -1}});
+
+    const jTasks = JSON.parse(JSON.stringify(tasks))
     
 
     console.log(tasks);

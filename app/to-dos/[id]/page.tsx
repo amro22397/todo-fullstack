@@ -27,7 +27,7 @@ const page = async ({ params }: { params: TaskListId}) => {
 
   const heads = headers();
 
-  const pathname = heads.get('referer');
+  const pathname = heads.get('referer') as any;
 
   console.log(params.id);
   console.log(pathname);
@@ -43,12 +43,19 @@ const page = async ({ params }: { params: TaskListId}) => {
       taskListId: {$in: [params.id]},
     }, {}, {sort: {createdAt: 1}});
 
+    const jTasks = JSON.parse(JSON.stringify(tasks))
 
-    mongoose.connect(process.env.MONGO_URL as string)
+
+
       const tasksList = await TasksList.find({userEmail: {$in: [session?.user?.email]}})
 
-      mongoose.connect(process.env.MONGO_URL as string)
+      const jTasksList = JSON.parse(JSON.stringify(tasksList))
+
+
+      
       const pagetaskList = await TasksList.findOne({_id: {$in: [params.id]}});
+
+      const jpagetaskList = JSON.parse(JSON.stringify(pagetaskList))
     
 
     console.log(tasks);
@@ -69,11 +76,11 @@ const page = async ({ params }: { params: TaskListId}) => {
         className="border border-gray-400 flex flex-col gap-6 bg-inherit shadow-md 
       rounded-md py-6 sm:px-8 px-4 w-[98%] sm:w-[85%] md:w-[70%] lg:w-[60%] xl:w-[55%]"
       >
-        <TaskHeader pagetaskList={pagetaskList} />
-        <Stats tasks={tasks}/>
+        <TaskHeader pagetaskList={jpagetaskList} />
+        <Stats tasks={jTasks}/>
         <AllTasksHeader taskListId={params.id} />
-        <TasksArea tasks={tasks} tasksList={tasksList}  />
-        <TasksFooter tasks={tasks} />
+        <TasksArea tasks={jTasks} tasksList={jTasksList}  />
+        <TasksFooter tasks={jTasks} />
       </div>
     </div>
   )

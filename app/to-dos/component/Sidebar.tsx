@@ -18,6 +18,7 @@ import {
 import EditDeleteTaskList from './EditDeleteTaskList'
 import Link from 'next/link'
 import CloseSidebar from './CloseSidebar'
+import SidebarTaskLists from './SidebarTaskLists'
 
 
 const SideBar = async () => {
@@ -26,6 +27,8 @@ const SideBar = async () => {
 
   mongoose.connect(process.env.MONGO_URL as string)
   const tasksList = await TasksList.find({userEmail: {$in: [session?.user?.email]}})
+
+  const jTasklists = JSON.parse(JSON.stringify(tasksList));
 
   const taskListIconSize = 17;
   const taskListButtonClassName = "cursor-pointer active:scale-95"
@@ -44,24 +47,11 @@ const SideBar = async () => {
             <div className="flex flex-row justify-between items-center">
             <h2 className="text-lg text-gray-700">Tasks List</h2>
 
-            <TaskListAddDialog tasksList={tasksList} />
+            <TaskListAddDialog tasksList={jTasklists} />
             
             </div>
 
-            <ul className="flex flex-col mx-2 gap-3 max-md:mb-4">
-              {tasksList.map((tasklist, index) => (
-                <div key={index} className="flex flex-row justify-between items-center">
-                  <Link href={`/to-dos/${tasklist._id}`}
-                  className="cursor-pointer font-semibold tracking-wider hover:text-gray-600
-                  text-md">
-                  {tasklist.name}
-                </Link>
-
-                <EditDeleteTaskList tasklist={tasklist} tasksList={tasksList} />
-                
-                </div>
-              ))}
-            </ul>
+            <SidebarTaskLists tasksList={jTasklists} />
             </div>
 
 
