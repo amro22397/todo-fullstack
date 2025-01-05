@@ -27,16 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={poppins.variable}
-      >
         <div className="flex md:flex-row flex-col">
         <SideBar />
         {children}
         </div>
-      </body>
-      
-    </html>
   );
 }

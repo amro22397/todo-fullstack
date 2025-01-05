@@ -12,9 +12,8 @@ const SearchButton = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <Button variant="ghost">
+        
           <IoSearchSharp className="text-[20px]" />
-        </Button>
       </PopoverTrigger>
       <PopoverContent>
         <Input id="search" placeholder="Search a task..." className="mt-2" />

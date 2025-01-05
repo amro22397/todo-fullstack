@@ -83,12 +83,18 @@ const TaskListAddDialog = ({ tasksList }: { tasksList: TaskList[]}) => {
     <Dialog open={isAddTaskListDialogOpen} onOpenChange={() => setIsAddTaskListDialogOpen(!isAddTaskListDialogOpen)} >
 
   <DialogTrigger>
-  <Button variant="outline" className="py-2 bg-transparent hover:bg-transparent border-none shadow-none">
-            <span className="bg-yellow-500 text-white px-1 py-1 rounded-full
-            active:scale-95">
-              <Plus className='' />
-            </span> 
+    {/*
+    <Button variant="outline" className="">
+            
             </Button>
+    */}
+  
+  <Plus className='text-black px-4 rounded-full py-2 hover:bg-transparent border-none shadow-none
+            active:scale-95' />
+
+            <span className="">
+              
+            </span> 
   </DialogTrigger>
 
   <DialogContent>
