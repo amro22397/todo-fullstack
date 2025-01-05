@@ -18,6 +18,7 @@ const page = () => {
     <div className='flex justify-center items-center h-screen poppins'>
       <LoginPage />
       <div className=""></div>
+      <div className=""></div>
     </div>
   )
 }
