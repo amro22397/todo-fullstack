@@ -1,14 +1,18 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import React from 'react'
 
-const page = async () => {
+const page = () => {
     
+  const { data: session, status } = useSession()
+      console.log(session);
 
   return (
     <div>
         Hello
+
+        <div>{JSON.stringify(session)}</div>
     </div>
   )
 }

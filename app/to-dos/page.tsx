@@ -23,14 +23,14 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
 import { FaUmbrellaBeach } from "react-icons/fa";
-import { getSession } from "../actions/getSession";
+import { getSession } from "next-auth/react";
 
 
 
 const page = async () => {
 
-  const session = await getSession();
-  console.log(session);
+  const session = getSession();
+    console.log(session);
   console.log(session?.user?.email)
 
     mongoose.connect(process.env.MONGO_URL as string)
@@ -58,6 +58,7 @@ const page = async () => {
       rounded-md py-6 sm:px-8 px-4 w-[98%] sm:w-[85%] md:w-[70%] lg:w-[60%] xl:w-[55%]"
       >
 
+      <div>{JSON.stringify(session, null, 2)}</div>
 
 
         <TaskHeader  />
