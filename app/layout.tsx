@@ -43,7 +43,7 @@ export default function RootLayout({
       <body
         className={poppins.variable}
       >
-        <AppProvider>
+        <AppProvider session>
           <AppContextProvider>
           <ThemeProvider 
           attribute="class"
