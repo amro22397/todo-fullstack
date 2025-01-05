@@ -9,13 +9,12 @@ import mongoose from "mongoose";
 import { Tasks } from "@/models/tasks";
 import { User } from "@/models/user";
 import { revalidatePath } from "next/cache";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authConfig } from "@/lib/auth";
 import LoginPage from "@/components/signIn/SignIn";
 import { TasksList } from "@/models/tasks-list";
 import { headers } from "next/headers";
 import { getSession } from "next-auth/react";
-import { getUser } from "@/app/actions/getUser";
 
 interface TaskListId {
   id: string;
@@ -47,7 +46,6 @@ const page = async ({ params }: { params: TaskListId}) => {
       const jpagetaskList = JSON.parse(JSON.stringify(pagetaskList))
     
 
-    console.log(tasks);
 
 
     if (!session?.user?.email) {

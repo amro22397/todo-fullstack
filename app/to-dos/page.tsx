@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
 import { FaUmbrellaBeach } from "react-icons/fa";
-import { getSession } from "next-auth/react";
+import { getProviders, getSession } from "next-auth/react";
 
 
 
@@ -33,18 +33,18 @@ const page = async () => {
 
   console.log(session)
 
+  const provider = await getProviders();
+  console.log(provider);
+
   
 
     mongoose.connect(process.env.MONGO_URL as string)
     const tasks = await Tasks.find({userEmail: {$in: [session?.user?.email]}}, {}, {sort: {createdAt: -1}});
 
     const jTasks = JSON.parse(JSON.stringify(tasks))
-    
-
-    console.log(tasks);
 
 
-    if (false) {
+    if (!session?.user?.email) {
       return (
         <div className='flex justify-center items-center h-screen poppins'>
               <LoginPage />
