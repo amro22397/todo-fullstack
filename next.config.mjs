@@ -11,10 +11,10 @@ const nextConfig = {
 experimental: {
     missingSuspenseWithCSRBailout: false,
   },    
-    typescript: {
+  typescript: {
         ignoreBuildErrors: true,
       },
-      eslint: {
+  eslint: {
         ignoreDuringBuilds: true,
       }
 };

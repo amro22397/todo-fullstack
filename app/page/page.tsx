@@ -15,6 +15,7 @@ const page = async () => {
         Hello
 
         <pre>{JSON.stringify(session, null, 2)}</pre>
+        <div className=""></div>
         
     </div>
   )
