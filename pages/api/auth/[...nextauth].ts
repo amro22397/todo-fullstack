@@ -7,7 +7,8 @@ import { User } from "@/models/user";
 import bcrypt from "bcrypt"
 
 export const authConfig: AuthOptions = {
-    
+    secret: process.env.NEXTAUTH_SECRET,
+
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -62,7 +63,7 @@ export const authConfig: AuthOptions = {
     session: {
         strategy: "jwt",
     },
-    secret: process.env.NEXTAUTH_SECRET,
+    
 }
 
 export default NextAuth(authConfig);
