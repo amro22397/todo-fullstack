@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import { Tasks } from '@/models/tasks';
 import TaskHeader from '@/components/todosComponents/TaskHeader/TaskHeader';
 import SideBar from '../to-dos/component/Sidebar';
+import { TasksList } from '@/models/tasks-list';
 
 const page = async () => {
     
@@ -14,6 +15,11 @@ const page = async () => {
 
   const session = await getSession();
     console.log(session);
+
+    mongoose.connect(process.env.MONGO_URL as string)
+      const tasksList = await TasksList.find({userEmail: {$in: [session?.user?.email]}})
+    
+      const jTasklists = JSON.parse(JSON.stringify(tasksList));
 
    // mongoose.connect(process.env.MONGO_URL as string)
     // const tasks = await Tasks.find({userEmail: {$in: [session?._doc?.email]}}, {}, {sort: {createdAt: -1}});
@@ -31,7 +37,7 @@ const page = async () => {
 
         <pre>{JSON.stringify(session, null, 2)}</pre>
 
-        <SideBar />
+        
         
         
     </div>
