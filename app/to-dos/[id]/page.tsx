@@ -14,7 +14,7 @@ import { authConfig } from "@/lib/auth";
 import LoginPage from "@/components/signIn/SignIn";
 import { TasksList } from "@/models/tasks-list";
 import { headers } from "next/headers";
-import { getSession } from "next-auth/react";
+import { getSession } from "@/app/actions/getUser";
 
 interface TaskListId {
   id: string;
@@ -22,8 +22,8 @@ interface TaskListId {
 
 const page = async ({ params }: { params: TaskListId}) => {
 
-  const session = await getServerSession(authConfig);
-  console.log(session);
+  const session = await getSession();
+    console.log(session);
 
     mongoose.connect(process.env.MONGO_URL as string)
     const tasks = await Tasks.find({
