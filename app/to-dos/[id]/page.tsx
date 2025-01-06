@@ -58,10 +58,11 @@ const page = async ({ params }: { params: TaskListId}) => {
     }
 
   return (
-    <div className="border flex items-center w-full justify-center poppins md:min-h-screen max-md:my-10  ">
+    <div className="border flex items-center w-full h-full justify-center poppins md:min-h-screen max-md:my-10  ">
       <div
         className="border border-gray-400 flex flex-col gap-6 bg-inherit shadow-md 
-      rounded-md py-6 sm:px-8 px-4 w-[98%] sm:w-[85%] md:w-[70%] lg:w-[60%] xl:w-[55%]"
+      rounded-md py-6 sm:px-8 px-4 w-[98%] sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-[80%] 2xl:w-[60%]
+      "
       >
         <TaskHeader pagetaskList={jpagetaskList} />
         <Stats tasks={jTasks}/>

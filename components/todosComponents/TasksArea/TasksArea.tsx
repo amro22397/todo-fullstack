@@ -25,7 +25,7 @@ const TasksArea = ({ tasks, tasksList }: {tasks: Task[], tasksList?: TaskList[]}
 
 
   return (
-    <ScrollArea className="h-60 flex flex-col gap-4">
+    <ScrollArea className="h-72 flex flex-col gap-4">
       {tasksList?.length === 0 ? (
         <div className="  h-full w-full flex items-center justify-center  flex-col gap-6">
         <FaUmbrellaBeach className="text-[79px] text-slate-500 opacity-85" />
@@ -82,7 +82,8 @@ export async function SingleTask({ singleTask, id }: { singleTask: Task, id: str
               //setIsTaskDialogOpened(true);
             }} */
             htmlFor="task"
-            className="text-lg font-semibold cursor-pointer hover:text-primary"
+            className="md:text-md xl:text-lg font-semibold cursor-pointer hover:text-primary
+            text-md"
           >
             {singleTask.name}
           </label>

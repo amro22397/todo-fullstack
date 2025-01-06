@@ -36,8 +36,9 @@ const SideBar = async () => {
   
 
   return (
-    <div className="bg-gray-50 max-md:z-50
-    md:w-[400px] md:h-screen border-r border-solid px-3 sm:px-14
+    <div className="max-md:z-50
+    md:w-[400px] w-[98%] sm:w-[95%] 
+     md:h-screen border-r border-solid px-3 sm:px-14
     
         border-gray-200 md:px-[11px] flex flex-col gap-4">
 

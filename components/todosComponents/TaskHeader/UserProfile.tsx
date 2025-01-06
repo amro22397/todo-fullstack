@@ -27,12 +27,12 @@ const UserProfile = () => {
   const session = useSession();
 
   const [open, setOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
 
   const [checked, setChecked] = useState(false);
 
 
-  const handleDarkModeClick = (e: React.MouseEvent) => {
+  /* const handleDarkModeClick = (e: React.MouseEvent) => {
     e.preventDefault();
 
     if (!checked) {
@@ -42,15 +42,15 @@ const UserProfile = () => {
       setTheme("light");
       setChecked(false);
     }
-  }
+  } */
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (theme === "dark") {
       setChecked(true);
     } else {
       setChecked(false);
     }
-  }, []);
+  }, []); */
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -67,6 +67,8 @@ const UserProfile = () => {
         <DropdownMenuGroup className="hover:bg-transparent">
           <DropdownMenuSeparator />
           {/* Dark Mode Item */}
+
+          {/*
           <DropdownMenuItem
             className="flex items-center justify-between mb-2"
             onClick={handleDarkModeClick}
@@ -78,6 +80,8 @@ const UserProfile = () => {
               id="airplane-mode"
             />
           </DropdownMenuItem>
+          */}
+          
 
           {/* Log out item */}
           <DropdownMenuLabel>
