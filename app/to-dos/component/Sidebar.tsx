@@ -20,11 +20,13 @@ import CloseSidebar from './CloseSidebar'
 import SidebarTaskLists from './SidebarTaskLists'
 import { getServerSession } from 'next-auth/next'
 import { authConfig } from '@/lib/auth'
+import { getSession } from '@/app/actions/getUser'
 
 
 const SideBar = async () => {
 
-  const session = await getServerSession(authConfig);
+  const session = await getSession();
+    console.log(session);
 
   mongoose.connect(process.env.MONGO_URL as string)
   const tasksList = await TasksList.find({userEmail: {$in: [session?.user?.email]}})
