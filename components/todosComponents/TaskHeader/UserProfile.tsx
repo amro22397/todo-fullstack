@@ -24,7 +24,7 @@ import { signOut, useSession } from "next-auth/react";
 
 const UserProfile = () => {
 
-  const session = useSession();
+  // const session = useSession();
 
   const [open, setOpen] = useState(false);
   // const { theme, setTheme } = useTheme();
@@ -61,7 +61,7 @@ const UserProfile = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel className="text-gray-600 text-sm">
-          {session.data?.user?.email}
+          {/* {session.data?.user?.email} */}
         </DropdownMenuLabel>
 
         <DropdownMenuGroup className="hover:bg-transparent">
