@@ -16,8 +16,8 @@ const page = async () => {
   const session = await getSession();
     console.log(session);
 
-    mongoose.connect(process.env.MONGO_URL)
-      const tasksList = await TasksList.find({})
+    // mongoose.connect(process.env.MONGO_URL as string)
+      // const tasksList = await TasksList.find({})
 
 
    // mongoose.connect(process.env.MONGO_URL as string)
@@ -43,8 +43,8 @@ const page = async () => {
   )
 }
 
-function formatDate(date = new Date()) {
-  const options = {
+function formatDate(date: Date = new Date()): string {
+  const options: Intl.DateTimeFormatOptions = {
     day: "numeric", // Should be 'numeric', not 'string'
     month: "long", // Should be 'long' (for full month name)
     year: "numeric", // Should be 'numeric', not 'string'
