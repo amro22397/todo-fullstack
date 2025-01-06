@@ -33,7 +33,7 @@ const page = async () => {
   const session = await getSession();
   console.log(session);
 
-    mongoose.connect(process.env.MONGO_URL as string)
+    /* mongoose.connect(process.env.MONGO_URL as string)
     const tasks = await Tasks.find({userEmail: {$in: [session?.user?.email]}}, {}, {sort: {createdAt: -1}});
 
     const jTasks = JSON.parse(JSON.stringify(tasks))
@@ -52,6 +52,7 @@ const page = async () => {
             </div>
       )
     }
+      */
 
   return (
     <div className="border flex items-center w-full justify-center poppins md:min-h-screen max-md:my-20  ">
