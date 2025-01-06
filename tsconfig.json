@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "AppContext.js",
-    "pages/api/auth/[...nextauth].js"
+    "pages/api/auth/[...nextauth].ts"
   ],
   "exclude": [
     "node_modules"
