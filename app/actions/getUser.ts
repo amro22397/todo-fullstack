@@ -1,6 +1,6 @@
-import { authConfig } from "@/lib/auth"
 import { User } from "@/models/user";
-import mongoose from "mongoose";
+import { authConfig } from "@/pages/api/auth/[...nextauth]";
+// import mongoose from "mongoose";
 import { getServerSession } from "next-auth"
 
 export async function getSession() {
@@ -20,7 +20,7 @@ export async function getSession() {
       const currentUser = await User.findOne({email: session?.user?.email})
 
     if (!currentUser) {
-        mongoose.connect(process.env.MONGO_URL as string)
+        // mongoose.connect(process.env.MONGO_URL as string)
         const user = await User.create({ email: session?.user?.email  })
         return {
           ...user,

@@ -6,10 +6,14 @@ import GoogleProvider from "next-auth/providers/google"
 import { User } from "@/models/user";
 import bcrypt from "bcrypt"
 
-export const authConfig = {
-    secret: process.env.NEXTAUTH_SECRET,
-
+export const authConfig: AuthOptions = {
+    
     providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID as string,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+        }),
+
         CredentialsProvider({
             name: "credentials",
             credentials: {
@@ -23,11 +27,12 @@ export const authConfig = {
                 }
             },
 
-            async authorize(credentials, req) {
-                if (!credentials || !credentials.email || !credentials.password)
-                    return null;
+            async authorize(credentials) {
+                if (!credentials || !credentials.email || !credentials.password) {
+                    throw new Error("Invalid email or password");
+                }
 
-                mongoose.connect(process.env.MONGO_URL);
+                mongoose.connect(process.env.MONGO_URL as string);
                 const dbUser = await User.findOne({email: credentials.email})
 
                 if (!dbUser || !dbUser?.hashedPassword) {
@@ -47,12 +52,6 @@ export const authConfig = {
 
             },
         }),
-
-
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        })
     ],
 
     pages: {
@@ -63,7 +62,7 @@ export const authConfig = {
     session: {
         strategy: "jwt",
     },
-    
+    secret: process.env.NEXTAUTH_SECRET,
 }
 
 export default NextAuth(authConfig);
