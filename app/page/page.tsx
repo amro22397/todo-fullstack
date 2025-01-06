@@ -4,6 +4,7 @@ import React from 'react'
 import { getSession, getUser } from '../actions/getUser';
 import mongoose from 'mongoose';
 import { Tasks } from '@/models/tasks';
+import TaskHeader from '@/components/todosComponents/TaskHeader/TaskHeader';
 
 const page = async () => {
     
@@ -18,7 +19,7 @@ const page = async () => {
   return (
     <div>
         Hello
-
+        <TaskHeader  />
         <pre>{JSON.stringify(session, null, 2)}</pre>
         
         
