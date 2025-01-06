@@ -27,12 +27,21 @@ const page = async () => {
                  <span className="font-semibold tracking-wide">Welcome to Todo App</span>
                   <span className="text-sm text-slate-600 text-center">Click on or add a list on the sidebar<br /> to start adding tasks</span>
                 </div>
-                
+
         <pre>{JSON.stringify(session, null, 2)}</pre>
         
         
     </div>
   )
+}
+
+function formatDate(date: Date = new Date()): string {
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric", // Should be 'numeric', not 'string'
+    month: "long", // Should be 'long' (for full month name)
+    year: "numeric", // Should be 'numeric', not 'string'
+  };
+  return date.toLocaleDateString("en-GB", options); 
 }
 
 export default page
