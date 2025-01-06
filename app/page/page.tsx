@@ -20,6 +20,14 @@ const page = async () => {
     <div>
         Hello
         <TaskHeader  />
+
+        <div className="  h-full w-full flex items-center justify-center  flex-col gap-2">
+                 {/*  <FaUmbrellaBeach className="text-[79px] text-slate-500 opacity-85" /> */}
+
+                 <span className="font-semibold tracking-wide">Welcome to Todo App</span>
+                  <span className="text-sm text-slate-600 text-center">Click on or add a list on the sidebar<br /> to start adding tasks</span>
+                </div>
+                
         <pre>{JSON.stringify(session, null, 2)}</pre>
         
         

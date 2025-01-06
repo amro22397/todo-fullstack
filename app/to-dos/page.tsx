@@ -97,7 +97,7 @@ function formatDate(date: Date = new Date()): string {
     month: "long", // Should be 'long' (for full month name)
     year: "numeric", // Should be 'numeric', not 'string'
   };
-  return date.toLocaleDateString("en-GB", options);
+  return date.toLocaleDateString("en-GB", options); 
 }
 
 
