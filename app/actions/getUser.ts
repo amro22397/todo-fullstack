@@ -2,11 +2,36 @@ import { User } from "@/models/user";
 import { authConfig } from "@/pages/api/auth/[...nextauth]";
 import mongoose from "mongoose";
 // import mongoose from "mongoose";
+
+
+
 import { getServerSession } from "next-auth"
 
-export async function getSession() {
+import type {
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from "next"
+import type { NextAuthOptions } from "next-auth"
+
+
+export const config = {
+    providers: [], // rest of your config
+  } satisfies NextAuthOptions
+
+export function getSession(
+    ...args:
+      | [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]
+      | [NextApiRequest, NextApiResponse]
+      | []
+  ) {
+    return getServerSession(...args, config)
+  }
+
+
+/* export async function getSession() {
   return await getServerSession(authConfig);
-}
+} */
 
 
   
