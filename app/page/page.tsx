@@ -1,7 +1,7 @@
 
 // import { getSession, useSession } from 'next-auth/react'
 import React from 'react'
-import { getUser } from '../actions/getUser';
+import { getSession, getUser } from '../actions/getUser';
 import mongoose from 'mongoose';
 import { Tasks } from '@/models/tasks';
 
@@ -10,7 +10,7 @@ const page = async () => {
  // const { data: session, status } = useSession()
   //    console.log(session);
 
-  const session = await getUser();
+  const session = await getSession();
     console.log(session);
 
    // mongoose.connect(process.env.MONGO_URL as string)
