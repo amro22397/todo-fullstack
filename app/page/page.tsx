@@ -17,7 +17,7 @@ const page = async () => {
     console.log(session);
 
     mongoose.connect(process.env.MONGO_URL as string)
-      const tasksList = await TasksList.find({userEmail: {$in: [session?.user?.email]}})
+      const tasksList = await TasksList.findOne({email: session?.user?.email})
 
 
    // mongoose.connect(process.env.MONGO_URL as string)
