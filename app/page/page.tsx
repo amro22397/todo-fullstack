@@ -5,6 +5,7 @@ import { getSession, getUser } from '../actions/getUser';
 import mongoose from 'mongoose';
 import { Tasks } from '@/models/tasks';
 import TaskHeader from '@/components/todosComponents/TaskHeader/TaskHeader';
+import SideBar from '../to-dos/component/Sidebar';
 
 const page = async () => {
     
@@ -29,6 +30,8 @@ const page = async () => {
                 </div>
 
         <pre>{JSON.stringify(session, null, 2)}</pre>
+
+        <SideBar />
         
         
     </div>
