@@ -45,7 +45,7 @@ const SideBar = async () => {
 
             <AppLogo className="mt-5"/>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 mx-2">
             <div className="flex flex-row justify-between items-center">
             <h2 className="text-lg text-gray-700">Tasks List</h2>
 

@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 const SidebarTaskLists = ({ tasksList }: { tasksList: TaskList[]}) => {
   return (
-    <ul className="flex flex-col mx-2 gap-3 max-md:mb-4">
+    <ul className="flex flex-col mx-0 gap-3 max-md:mb-4">
               {tasksList.map((tasklist, index) => (
                 <div key={index} className="flex flex-row justify-between items-center">
                   <Link href={`/to-dos/${tasklist._id}`}
