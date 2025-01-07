@@ -22,7 +22,10 @@ const TasksSchema = new Schema({
     taskListId: {
         type: String,
     },
-}, { timestamps: true });
+}, {
+    versionKey: false,
+    timestamps: true
+});
 
 
 export const Tasks = models?.Tasks || model("Tasks", TasksSchema)

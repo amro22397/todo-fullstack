@@ -7,21 +7,50 @@ import { Tasks } from '@/models/tasks';
 import TaskHeader from '@/components/todosComponents/TaskHeader/TaskHeader';
 import SideBar from '../to-dos/component/Sidebar';
 import { TasksList } from '@/models/tasks-list';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 const page = async () => {
     
- // const { data: session, status } = useSession()
-  //    console.log(session);
+ // const session = useSession()
+   //  console.log(session);
+
+    // const [tasks, setTasks] = useState([]);
 
   const session = await getSession();
     console.log(session);
 
-    // mongoose.connect(process.env.MONGO_URL as string)
-      // const tasksList = await TasksList.find({})
+    mongoose.connect(process.env.MONGO_URL as string)
+      const getTasksList = await TasksList.find({})
+      const tasklists = JSON.parse(JSON.stringify(getTasksList));
+      console.log(tasklists);
 
 
    // mongoose.connect(process.env.MONGO_URL as string)
-    // const tasks = await Tasks.find({userEmail: {$in: [session?._doc?.email]}}, {}, {sort: {createdAt: -1}});
+    //const tasks = await Tasks.find({userEmail: {$in: [session?._doc?.email]}}, {}, {sort: {createdAt: -1}});
+
+
+
+
+
+ /*   useEffect(() => {
+      fetchTasks();
+      console.log(tasks)
+    }, []);
+
+    const fetchTasks = async () => {
+      try {
+        const res: any = await axios.get('/api/tasks')
+        const data = await res.json();
+        setTasks(res);
+        
+      } catch (error: any) {
+        console.log(error)
+      }
+    }
+
+    */
+
   return (
     <div>
         Hello
