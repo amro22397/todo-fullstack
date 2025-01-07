@@ -21,7 +21,7 @@ const page = async () => {
   const session = await getSession();
     console.log(session);
 
-    const tasks = await getTasks()
+    // const tasks = await getTasks()
     // mongoose.connect(process.env.MONGO_URL as string)
       // const getTasksList = await TasksList.find({})
       // const tasklists = JSON.parse(JSON.stringify(getTasksList));
@@ -66,7 +66,7 @@ const page = async () => {
                 </div>
 
         <pre>{JSON.stringify(session, null, 2)}</pre>
-        <pre>{JSON.stringify(tasks, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(tasks, null, 2)}</pre> */}
 
         
         
