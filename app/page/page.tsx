@@ -20,10 +20,10 @@ const page = async () => {
   const session = await getSession();
     console.log(session);
 
-    mongoose.connect(process.env.MONGO_URL as string)
-      const getTasksList = await TasksList.find({})
-      const tasklists = JSON.parse(JSON.stringify(getTasksList));
-      console.log(tasklists);
+    // mongoose.connect(process.env.MONGO_URL as string)
+      // const getTasksList = await TasksList.find({})
+      // const tasklists = JSON.parse(JSON.stringify(getTasksList));
+      //console.log(tasklists);
 
 
    // mongoose.connect(process.env.MONGO_URL as string)
